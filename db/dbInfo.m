@@ -15,7 +15,7 @@ methods
             bNoPlane=0;
         end
         obj.database=database;
-        obj.rootDBdir=BLdirs(database);
+        obj.rootDBdir=Env.var('db',database);
 
         obj.get_db_info();
         if ~bNoPlane

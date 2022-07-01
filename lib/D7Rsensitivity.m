@@ -191,6 +191,6 @@ end
 if bPLOT
     figure;
     plot(LambdaNm,Srgb(:,1),'r',LambdaNm,Srgb(:,2),'g',LambdaNm,Srgb(:,3),'b','linewidth',2);
-    formatFigure('Wavelength (nm)','Sensitivity');
+    Fig.format('Wavelength (nm)','Sensitivity');
     axis square;
 end

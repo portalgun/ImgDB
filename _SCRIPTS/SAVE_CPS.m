@@ -1,7 +1,7 @@
 database='LRSI';
 
 db=dbInfo(database);
-p=pr(length(db.allImages),1,'Generating and saving CPLOOKUP');
+p=Pr(length(db.allImages),1,'Generating and saving CPLOOKUP');
 for i = db.allImage
     p.u();
     xyz=XYZ(database,i);

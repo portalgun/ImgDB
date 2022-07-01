@@ -55,14 +55,14 @@ methods
 %% PP
     function [IppX]=get_proj_plane_x(obj,LorR)
         % XXX xoffset check
-        K=obj.([LorR 'Exyz'])(1);
-        IppX    =    K + smpPos(obj.IszRC(2)./obj.screenRCm(2),obj.IszRC(2));
+        K=-1*obj.([LorR 'Exyz'])(1);
+        IppX    =    K + Wave.smpPos(obj.IszRC(2)./obj.screenRCm(2),obj.IszRC(2));
         IppX    =    IppX + diff(IppX(1:2))/2;
         IppX=IppX+obj.xOffset;
     end
     function [IppY]=get_proj_plane_y(obj,LorR)
         K=obj.([LorR 'Exyz'])(2);
-        IppY    =   K + fliplr(smpPos(obj.IszRC(1)./obj.screenRCm(1),obj.IszRC(1)));
+        IppY    =   K + fliplr(Wave.smpPos(obj.IszRC(1)./obj.screenRCm(1),obj.IszRC(1)));
         IppY    =   transpose((IppY - diff(IppY(1:2))/2));
         IppY=IppY+obj.yOffset;
     end
@@ -77,9 +77,9 @@ methods
     end
     function plot_pp(obj)
         subplot(2,1,1)
-        imagesc(obj.IppXm{3})
-        formatFigure('X');
-        axis image
+        imagesc(obj.IppXm{3});
+        Fig.format('X');
+        axis image;
         h=size(obj.IppXm{3},1);
         w=size(obj.IppXm{3},2);
         xticks(w);
@@ -90,9 +90,9 @@ methods
 
 
         subplot(2,1,2)
-        imagesc(obj.IppYm{3})
-        formatFigure('Y');
-        axis image
+        imagesc(obj.IppYm{3});
+        Fig.format('Y');
+        axis image;
         h=size(obj.IppYm{3},1);
         w=size(obj.IppYm{3},2);
         xticks(w);

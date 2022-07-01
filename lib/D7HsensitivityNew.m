@@ -20,12 +20,12 @@ function [RGB LambdaNm] = D7HsensitivityNew(LambdaMinMax,LambdaStep,bPLOT)
 %   subplot(1,2,1); hold on;
 %   plot(Lnm,XYZ(:,1),   'r',  Lnm,XYZ(:,2),   'g',  Lnm,XYZ(:,3),   'b'  ,'linewidth',2);
 %   plot(Lnm,XYZfit(:,1),'r--',Lnm,XYZfit(:,2),'g--',Lnm,XYZfit(:,3),'b--')
-%   formatFigure('Wavelength (nm)','RGB','XYZ'); axis square;
+%   Fig.format('Wavelength (nm)','RGB','XYZ'); axis square;
 %   legend({'X','Y','Z','X fit','Y fit', 'Z fit'})
 %   subplot(1,2,2); hold on;
 %   plot(Lnm,LMS(:,1),   'r',  Lnm,LMS(:,2),   'g',  Lnm,LMS(:,3),   'b'  ,'linewidth',2);
 %   plot(Lnm,LMSfit(:,1),'r--',Lnm,LMSfit(:,2),'g--',Lnm,LMSfit(:,3),'b--')
-%   formatFigure('Wavelength (nm)','RGB','LMS'); axis square;
+%   Fig.format('Wavelength (nm)','RGB','LMS'); axis square;
 %   legend({'L','M','S','L fit','M fit', 'S fit'})
 % 
 % LambdaMinMax: min and max values for which to return sensitivities
@@ -367,7 +367,7 @@ end
 if bPLOT
     figure; 
     plot(LambdaNm,RGB(:,1),'ro-',LambdaNm,RGB(:,2),'go-',LambdaNm,RGB(:,3),'bo-','linewidth',2);
-    formatFigure('Wavelength (nm)','RGB',['D7H new: ' num2str(LambdaStep) 'nm steps']);
+    Fig.format('Wavelength (nm)','RGB',['D7H new: ' num2str(LambdaStep) 'nm steps']);
     axis square
     ylim([0 1.1])
 end

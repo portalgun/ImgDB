@@ -57,7 +57,7 @@ if bPLOT == 1
     plot(lambdaNm,D7HnormWeighted(:,2),'g--','linewidth',2);
     plot(lambdaNm,D7HnormWeighted(:,3),'b--','linewidth',2);
     plot(lambdaNm,d65./sum(d65),'ko-');
-    formatFigure('Wavelength (nm)','Sensitivity');
+    Fig.format('Wavelength (nm)','Sensitivity');
     legend({'L','M','S','L_{d65}','M_{d65}','S_{d65}','d65'});
     axis square
 end

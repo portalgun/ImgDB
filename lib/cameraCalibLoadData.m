@@ -68,6 +68,6 @@ if bPLOT
     for c = 1:3
         plot(LambdaPeakNm,Srgb(:,c),'-','color',color(:,c),'linewidth',2)
     end
-    formatFigure('\lambda (nm)','Pixel Value Sensitivity');
+    Fig.format('\lambda (nm)','Pixel Value Sensitivity');
     xlim(minmax(LambdaPeakNm));
 end

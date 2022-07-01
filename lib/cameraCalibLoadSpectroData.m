@@ -50,14 +50,14 @@ if bPLOT
     subplot(2,1,1); hold on;
     plot(LambdaInFilename,LambdaInFilename,'r--','linewidth',2)
     plot(LambdaInFilename,LambdaPeakNm,'k-','linewidth',2)
-    formatFigure('\lambda (setting)','\lambda (measured)','Spectroradiometer Data')
+    Fig.format('\lambda (setting)','\lambda (measured)','Spectroradiometer Data')
     axis tight
     
     subplot(2,1,2); hold on;
     plot(squeeze(rawData(:,1,1)),squeeze(rawData(:,2,1:1:size(rawData,3))),'linewidth',1)
     plot(squeeze(rawDataA(:,1,1)),squeeze(rawDataA(:,2,1:1:size(rawDataA,3))),':','linewidth',1)
     plot(squeeze(rawDataB(:,1,1)),squeeze(rawDataB(:,2,1:1:size(rawDataB,3))),':','linewidth',1)
-    formatFigure('Wavelength (nm)', 'Radiance (w/std/m^2)')
+    Fig.format('Wavelength (nm)', 'Radiance (w/std/m^2)')
 %     legend({'Avg',['V' num2str(whichMeasureA)],['V' num2str(whichMeasureB)]})
 end
 

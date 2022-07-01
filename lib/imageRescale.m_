@@ -40,7 +40,7 @@ if bPLOT
     figure('position',[ 560   155   808   992]); 
     subplot(2,1,1);
     imagesc(I.^exp); axis image;
-    formatFigure([],[],['Q=[' num2str(Q(1)) ' ' num2str(Q(2)) ']']);
+    Fig.format([],[],['Q=[' num2str(Q(1)) ' ' num2str(Q(2)) ']']);
     caxis(minmax(I).^exp)
     
     subplot(2,1,2);
@@ -49,7 +49,7 @@ if bPLOT
     [r c] = ind2sub(size(Inew),find(bIndBd));
     plot(c,r,'r.');
     end
-    formatFigure([],[],['B=[' num2str(B(1)) ' ' num2str(B(2)) ']; # bad = ' num2str(sum(bIndBd(:))) '; % bad = ' num2str(100.*sum(bIndBd(:))./numel(bIndBd),'%.2f') ]);
+    Fig.format([],[],['B=[' num2str(B(1)) ' ' num2str(B(2)) ']; # bad = ' num2str(sum(bIndBd(:))) '; % bad = ' num2str(100.*sum(bIndBd(:))./numel(bIndBd),'%.2f') ]);
     colormap gray;
     caxis(B.^exp)
 end

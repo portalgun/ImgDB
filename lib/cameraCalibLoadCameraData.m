@@ -39,7 +39,7 @@ for f = 1:length(LambdaInFilename)
         end
         subplot(2,1,1);
         imagesc(I); axis equal; axis tight; axis off;
-        formatFigure('','',['\lambda (monochrometer setting)=' num2str(LambdaInFilename(f))]);
+        Fig.format('','',['\lambda (monochrometer setting)=' num2str(LambdaInFilename(f))]);
         
         bins = 0:500:67500;
         subplot(2,1,2);  cla; hold on;
@@ -51,7 +51,7 @@ for f = 1:length(LambdaInFilename)
         set(h(3),'FaceColor','r','EdgeColor','k')
         set(h(2),'FaceColor','g','EdgeColor','k')
         set(h(1),'FaceColor','b','EdgeColor','k')
-        formatFigure('Pixel Value','Occurence')
+        Fig.format('Pixel Value','Occurence')
         xlim([minmax(bins)])
         killer = 1;
         if LambdaInFilename(f) >= 595
@@ -78,7 +78,7 @@ if bPLOT == 1
     set(gcf,'position',[200         550        1096         556]);
     subplot(1,2,1); hold on
     plot(LambdaInFilename,RGB(:,1),'r',LambdaInFilename,RGB(:,2),'g',LambdaInFilename,RGB(:,3),'b','linewidth',2);
-    formatFigure('\lambda (monochrometer setting)','PixelValue','Raw');
+    Fig.format('\lambda (monochrometer setting)','PixelValue','Raw');
     xlim([350 750])
     set(gca,'xtick',[400:100:700])
     set(gca,'yscale','log')
@@ -89,7 +89,7 @@ if bPLOT == 1
     plot(LambdaInFilename,RGB(:,1).*((Aperture./ApertureMax).^2)./Shutter,'r', ...
          LambdaInFilename,RGB(:,2).*((Aperture./ApertureMax).^2)./Shutter,'g', ...
          LambdaInFilename,RGB(:,3).*((Aperture./ApertureMax).^2)./Shutter,'b','linewidth',2);
-    formatFigure('\lambda (monochrometer setting)','PixelValue*A/T','RawScaled');
+    Fig.format('\lambda (monochrometer setting)','PixelValue*A/T','RawScaled');
     xlim([350 750])
     set(gca,'xtick',[400:100:700])
     legend({'R' 'G' 'B'},2);

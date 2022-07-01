@@ -15,12 +15,16 @@ methods
         obj.get_dire();
     end
     function obj = get_dire(obj)
+
         if iscell(obj.hash)
             for i = 1:length(obj.hash)
-                obj.DBdir{i}=[obj.rootDBdir obj.type filesep obj.hash{i} filesep];
+                obj.DBdir{i}=Env.var('ImgDB.img', obj.database, obj.hash{i});
+                %obj.DBdir{i}=[obj.rootDBdir obj.type filesep obj.hash{i} filesep];
             end
         else
-            obj.DBdir=[obj.rootDBdir obj.type filesep obj.hash filesep];
+            obj.DBdir=Env.var('ImgDB.img', obj.database, obj.hash);
+            %obj.DBdir=Env.var('Imgdb.img',obj.database,obj.hash);
+            %obj.DBdir=[obj.rootDBdir obj.type filesep obj.hash filesep];
         end
 
     end

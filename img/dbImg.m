@@ -37,7 +37,7 @@ methods
         end
         if ~exist('LorR','var') || isempty(LorR) || (ischar(LorR) && strcmp(LorR,'B'))
             obj.LorR={'L','R'};
-        elseif ischar(LorR) && isLorR(LorR)
+        elseif ischar(LorR) && Str.Alph.isLorR(LorR)
             obj.LorR=LorR;
         elseif LorR==1
             obj.LorR='L';
@@ -75,33 +75,45 @@ methods
             obj.load_image(obj.fname,obj.db.hash);
         end
     end
-    function fname=get_fnames(obj,hash,i)
-        if ~exist('i','var') || isempty(i)
-            i=0;
+    function fname=get_fnames(obj,hash,ind)
+        if ~exist('ind','var') || isempty(ind)
+            ind=0;
         end
-        if ~iscell(obj.LorR)
-            fname=obj.get_fname(obj.LorR,hash);
+        if strcmp(hash,'cps')
+            fname=Cps.getLookupFname();
+        end
+        if obj.bMono(ind)
+            fname=obj.get_fname('',hash,ind);
+        elseif ~iscell(obj.LorR)
+            fname=obj.get_fname(obj.LorR,hash,ind);
         else
-            fname{1}=obj.get_fname('L',hash,i);
-            fname{2}=obj.get_fname('R',hash,i);
+            fname{1}=obj.get_fname('L',hash,ind);
+            fname{2}=obj.get_fname('R',hash,ind);
         end
     end
-    function fname=get_fname(obj,LorR,hash,i)
-        if ~exist('i','var') || isempty(i)
-            i=0;
-        end
-        Istr=num2str(obj.I,'%03i');
+    function out=bMono(obj,ind)
+        out=Fil.exist([obj.get_dir(ind) '.bMono']);
+    end
+    function dire=get_dir(obj,ind)
         if iscell(obj.db.DBdir)
-            dire=[obj.db.DBdir{i}];
+            dire=[obj.db.DBdir{ind}];
         else
             dire=[obj.db.DBdir];
         end
-        if ~exist(dire,'dir')
-            disp(['No such directoy ' dire])
+        dire=Dir.parse(dire);
+    end
+    function fname=get_fname(obj,LorR,hash,ind)
+        if ~exist('ind','var') || isempty(ind)
+            i=0;
+        end
+        dire=obj.get_dir(ind);
+        if ~Dir.exist(dire)
+            disp(['No such directoy ' dire]);
             return
         end
-        nm=[LorR Istr];
-        name=regexpdir(dire,nm);
+
+        nm=dbImg.get_name(LorR,obj.I);
+        name=Dir.reFiles(dire,[nm '\..+']);
         if isempty(name)
             disp(['No such file ' nm ' in ' dire]);
             return
@@ -117,13 +129,13 @@ methods
             hash=obj.db.hash;
         end
 
-        if regExp(hash,'^[0-9]');
+        if Str.RE.ismatch(hash,'^[0-9]');
             hashstr=['p' hash];
         else
             hashstr=hash;
         end
 
-        if ~iscell(obj.LorR)
+        if ~iscell(fname)
             obj.im.(hashstr)=obj.load_image_helper(fname,hash);
         else
             obj.im.(hashstr)=cell(2,1);
@@ -139,10 +151,27 @@ methods
         else
             i=load(fname);
         end
-        if regExp(hash,'^[0-9]');
+        if Str.RE.ismatch(hash,'^[0-9]');
             hashstr=['p' hash];
         else
             hashstr=hash;
+        end
+
+
+        if ~iscell(obj.LorR)
+            LorR={obj.LorR};
+        else
+            LorR=obj.LorR;
+        end
+        bStruct=false;
+        if isstruct(i)
+            for k=1:numel(LorR)
+                name=[LorR{k} hash];
+                if isfield(i,name)
+                    bStruct=true;
+                    return
+                end
+            end
         end
 
         if isstruct(i) && isfield(i,'bImap')
@@ -151,8 +180,8 @@ methods
             i=i.(hashstr);
         elseif isstruct(i) && isfield(i,'imap')
             i=i.imap;
-        elseif isstruct(i) && isfield(i,[obj.LorR hash])
-            i=i.([obj.LorR hash]);
+        elseif bStruct
+            i=i.(name);
         end
 
         % XXX
@@ -169,11 +198,63 @@ methods
         else
             imagesc(obj.i);
         end
-        formatImage();
+        Fig.formatIm();
     end
 
 end
 methods(Static=true)
+    function im=getImgs(varargin)
+    % dbImg.getImgs('LRSI','img',{'pht','xyz'},1,'L')
+        if nargin > 5
+            error('Too many inputs.')
+        end
+        varargin{6}=1;
+        dbI=dbImg(varargin{:});
+        im=dbI.im;
+
+        %dbName,dbType,fileType,num,LorR,bSkipDB)
+        %I=dbImg(varargin{:});
+        %I=db.I;
+    end
+
+    function varargout=getImg(type,varargin)
+    % dbImg.getImg('LRSI','img','pht',1,'L')
+        dbI=dbImg(type,varargin{:});
+        flds=fieldnames(dbI.im);
+        ind=ismember(flds,'edges');
+
+        bEdges=0;
+        if any(ind)
+            bEdges=1;
+            flds(ind)=[];
+        end
+        if numel(flds)==1 && iscell(dbI.im.(flds{1})) && numel(flds)==1 && nargout >= 2
+            varargout{1}=dbI.im.(flds{1}){1};
+            varargout{2}=dbI.im.(flds{1}){2};
+            n=2;
+        elseif numel(flds)==1 && iscell(dbI.im.(flds{1})) && numel(flds)==1 && nargout == 1
+            varargout{1}=dbI.im.(flds{1});
+            return
+        elseif  numel(flds)==1 && iscell(dbI.im.(flds{1})) && numel(flds)==1
+            varargout{1}=dbI.im.(flds{1}){1};
+            n=1;
+        elseif  numel(flds)==1 && ~iscell(dbI.im.(flds{1}))
+            varargout{1}=dbI.im.(flds{1});
+            n=1;
+        end
+        if bEdges && nargout > n
+            varargout{n+1}=dbi.im.edges;
+        end
+    end
+    function name=get_name(LorRorN,I)
+        if LorRorN=='N'
+            LorRorN='';
+        end
+        name=[LorRorN num2str(I,'%03i')];
+    end
+    function re=get_name_re()
+        re='[LR][0-9]{3}';
+    end
     function varargout=get_img(database,type,hash,I,LorR, bSkipDB,db)
         if ~exist('LorR','var')
             LorR=[];

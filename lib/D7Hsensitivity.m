@@ -192,7 +192,7 @@ end
 if bPLOT
     figure; 
     plot(LambdaNm,Srgb(:,1)./max(Srgb(:,1)),'r',LambdaNm,Srgb(:,2)./max(Srgb(:,2)),'g',LambdaNm,Srgb(:,3)./max(Srgb(:,3)),'b','linewidth',2);
-    formatFigure('Wavelength (nm)','Sensitivity','D7H');
+    Fig.format('Wavelength (nm)','Sensitivity','D7H');
     axis square
     ylim([0 1.1])
 end

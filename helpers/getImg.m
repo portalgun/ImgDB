@@ -1,5 +1,5 @@
-function varargout=getImg(type,varargin)
-% getImg('LRSI','img','pht',1,'L')
+function varargout=dbImg.getImg(type,varargin)
+% dbImg.getImg('LRSI','img','pht',1,'L')
     dbI=dbImg(type,varargin{:});
     flds=fieldnames(dbI.im);
     ind=ismember(flds,'edges');

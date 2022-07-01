@@ -4,7 +4,7 @@ xyz=XYZ('LRSI',8);
 xyz.get_cpLookup_bi;
 %
 close all
-pht=getImg('LRSI','img','pht',8);
+pht=dbImg.getImg('LRSI','img','pht',8);
 
 xs=size(pht{1},2);
 sz=size(pht{1});
@@ -17,7 +17,7 @@ y2=[xyz.CPs{1}{2}(ind,1)];
 
 figure(1)
 imagesc([pht{1}.^.4 pht{2}.^.4]); hold on
-formatImage();
+Fig.formatIm();
 plot(x1,y1,'r.')
 plot(x2,y2,'y.')
 
@@ -28,7 +28,7 @@ y2=[xyz.CPs{2}{2}(ind,1)];
 
 figure(2)
 imagesc([pht{1}.^.4 pht{2}.^.4]); hold on
-formatImage();
+Fig.formatIm();
 plot(x1,y1,'r.')
 plot(x2,y2,'y.')
 
@@ -40,7 +40,7 @@ y2=[xyz.cpLookup{1}(ind,1)];
 
 figure(3)
 imagesc([pht{1}.^.4 pht{2}.^.4]); hold on
-formatImage();
+Fig.formatIm();
 plot(x1,y1,'r.')
 plot(x2,y2,'y.')
 
@@ -52,7 +52,7 @@ y2=[xyz.cpLookup{2}(ind,1)];
 
 figure(4)
 imagesc([pht{1}.^.4 pht{2}.^.4]); hold on
-formatImage();
+Fig.formatIm();
 plot(x1,y1,'r.')
 plot(x2,y2,'y.')
 %GETCPLOOKPUP

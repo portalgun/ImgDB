@@ -140,7 +140,7 @@ if bPLOT
     figure('position',[61         590        1002         507]);
     subplot(1,2,1);
     imagesc((RGB./max(RGB(:))).^.5); caxis([0 1]);
-    formatFigure(' ', ' ','Original',0,0,22,18);
+    Fig.format(' ', ' ','Original',0,0,22,18);
     axis square
     if size(RGB,3) == 1
         colormap gray;
@@ -148,7 +148,7 @@ if bPLOT
     
     subplot(1,2,2);
     imagesc((RGBcalib./max(RGBcalib(:))).^.5); caxis([0 1]);
-    formatFigure([num2str(length(indNegR)) ' negative pixels'], ' ',transformType,0,0,22,18);
+    Fig.format([num2str(length(indNegR)) ' negative pixels'], ' ',transformType,0,0,22,18);
     axis square
     if size(RGBcalib,3) == 1
         colormap gray;

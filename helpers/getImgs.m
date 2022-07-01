@@ -1,5 +1,5 @@
-function im=getImgs(varargin)
-% getImgs('LRSI','img',{'pht','xyz'},1,'L')
+function im=dbImg.getImgs(varargin)
+% dbImg.getImgs('LRSI','img',{'pht','xyz'},1,'L')
     if nargin > 5
         error('Too many inputs.')
     end

@@ -10,7 +10,7 @@ properties(Hidden =true)
 end
 methods
     function obj=get_allRC(obj)
-        obj.allRC=distribute(1:obj.IszRC(1),1:obj.IszRC(2));
+        obj.allRC=Set.distribute(1:obj.IszRC(1),1:obj.IszRC(2));
     end
     function obj=get_blankmap(obj)
         obj.blankmap=zeros(obj.IszRC);

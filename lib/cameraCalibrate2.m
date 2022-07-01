@@ -168,7 +168,7 @@ if bPLOT
     subplot(1,2,1);
     % image(sqrt(RGB./max(RGB(:))));
     image(sqrt(RGB./(2^bitsIn-1)));
-    formatFigure([num2str(length(indNegRGBR)) ' neg & ' num2str(length(indPosRGBR)) ' pos pixels'], ' ','Original',0,0,22,18);
+    Fig.format([num2str(length(indNegRGBR)) ' neg & ' num2str(length(indPosRGBR)) ' pos pixels'], ' ','Original',0,0,22,18);
     axis square
     hold on; 
     plot(indNegRGBG,indNegRGBR,'b.');
@@ -180,7 +180,7 @@ if bPLOT
     subplot(1,2,2);
     % imagesc(sqrt(RGBcalib./max(RGBcalib(:))));
     image(sqrt(RGBcalib./(2^bitsOut-1)));
-    formatFigure([num2str(length(indNegR)) ' neg & ' num2str(length(indPosR)) ' pos pixels'], ' ',transformType,0,0,22,18);
+    Fig.format([num2str(length(indNegR)) ' neg & ' num2str(length(indPosR)) ' pos pixels'], ' ',transformType,0,0,22,18);
     axis square
     if size(RGBcalib,3) == 1
         colormap gray;

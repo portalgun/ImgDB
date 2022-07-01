@@ -93,19 +93,19 @@ end
 %%
 if bPLOT
     figure(5555); set(gcf,'position',[1000 300 600 1080]);
-    subplot(4,1,1); cla; imagesc([LccdBffrOrig RccdBffrOrig].^.4);  hold on; colormap gray(256); axis image; formatFigure([],[],['Lccd & Rccd Buffer [' num2str(PszRCbffr(2)) 'x' num2str(PszRCbffr(1)) ']'] );
+    subplot(4,1,1); cla; imagesc([LccdBffrOrig RccdBffrOrig].^.4);  hold on; colormap gray(256); axis image; Fig.format([],[],['Lccd & Rccd Buffer [' num2str(PszRCbffr(2)) 'x' num2str(PszRCbffr(1)) ']'] );
     plotSquare(fliplr(floor(size(LccdBffr)./2+1)),PszXY,'y',1); plotSquare([PszRCbffr(2) 0]+fliplr(floor(size(LccdBffr)./2+1)),PszXY,'y',1);
     plotSquare(fliplr(floor(size(LccdBffr)./2+1)),[4 4],'y',1); plotSquare([PszRCbffr(2) 0]+fliplr(floor(size(LccdBffr)./2+1)),[4 4],'y',1);
 
-    subplot(4,1,2); cla; imagesc([LretBffr RretBffr].^.4); hold on; colormap gray(256); axis image; formatFigure([],[],['Lret & Rret Buffer [' num2str(PszRCbffr(2)) 'x' num2str(PszRCbffr(1)) ']'] ); cax = caxis;
+    subplot(4,1,2); cla; imagesc([LretBffr RretBffr].^.4); hold on; colormap gray(256); axis image; Fig.format([],[],['Lret & Rret Buffer [' num2str(PszRCbffr(2)) 'x' num2str(PszRCbffr(1)) ']'] ); cax = caxis;
     plotSquare(fliplr(floor(size(LccdBffr)./2+1)),PszXY,'y',1); plotSquare([PszRCbffr(2) 0]+fliplr(floor(size(LccdBffr)./2+1)),PszXY,'y',1);
     plotSquare(fliplr(floor(size(LccdBffr)./2+1)),[4 4],'y',1); plotSquare([PszRCbffr(2) 0]+fliplr(floor(size(LccdBffr)./2+1)),[4 4],'y',1);
 
-    subplot(4,1,3); cla; imagesc([Lccd Rccd].^.4);          hold on; colormap gray(256); axis image; formatFigure([],[],['Lccd & Rccd [' num2str(PszXY(1)) 'x' num2str(PszXY(2)) ']']); set(gca,'xtick',[]);
+    subplot(4,1,3); cla; imagesc([Lccd Rccd].^.4);          hold on; colormap gray(256); axis image; Fig.format([],[],['Lccd & Rccd [' num2str(PszXY(1)) 'x' num2str(PszXY(2)) ']']); set(gca,'xtick',[]);
     plotSquare(fliplr(floor(size(Lccd)./2+1)),PszXY,'y',1); plotSquare([PszRC(2) 0]+fliplr(floor(size(Lccd)./2+1)),PszXY,'y',1);
     plotSquare(fliplr(floor(size(Lccd)./2+1)),[4 4],'y',1); plotSquare([PszRC(2) 0]+fliplr(floor(size(Rccd)./2+1)),[4 4],'y',1); caxis(cax);
 
-    subplot(4,1,4); cla; imagesc([Lret Rret].^.4);          hold on; colormap gray(256); axis image; formatFigure([],[],'Lret & Rret');
+    subplot(4,1,4); cla; imagesc([Lret Rret].^.4);          hold on; colormap gray(256); axis image; Fig.format([],[],'Lret & Rret');
     plotSquare(fliplr(floor(size(Lccd)./2+1)),PszXY,'y',1); plotSquare([PszRC(2) 0]+fliplr(floor(size(Lccd)./2+1)),PszXY,'y',1);
     plotSquare(fliplr(floor(size(Lccd)./2+1)),[4 4],'y',1); plotSquare([PszRC(2) 0]+fliplr(floor(size(Rccd)./2+1)),[4 4],'y',1); caxis(cax);
 

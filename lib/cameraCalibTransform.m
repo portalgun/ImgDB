@@ -93,7 +93,7 @@ if bPLOT
     writeText(.15,.9,{['K_R=' num2str(Krgb(1),4)]},'ratio',15)
     writeText(.15,.8,{['K_G=' num2str(Krgb(2),4)]},'ratio',15)
     writeText(.15,.7,{['K_B=' num2str(Krgb(3),4)]},'ratio',15)
-    formatFigure('\lambda (nm)',' ','RGB sensitivity',0,0,18,14)
+    Fig.format('\lambda (nm)',' ','RGB sensitivity',0,0,18,14)
     xlim([350 750])
     set(gca,'xtick',[400:100:700])
     axis square;
@@ -107,7 +107,7 @@ if bPLOT
     for c = 1:size(Rtgt,2)
         plot(SrgbLambdaNm,Stgt(:,c),'--','color',colors(c),'linewidth',2)
     end
-    formatFigure('\lambda (nm)',' ',[transformType ' sensitivity'],0,0,18,14)
+    Fig.format('\lambda (nm)',' ',[transformType ' sensitivity'],0,0,18,14)
     xlim([350 750])
     set(gca,'xtick',[400:100:700])
     axis square;
@@ -117,7 +117,7 @@ if bPLOT
         plot(SrgbLambdaNm,Rtgt(:,c),'.','color',colors(c),'linewidth',2)  
         plot(SrgbLambdaNm,Stgt(:,c),'--','color',colors(c),'linewidth',1.5)
     end
-    formatFigure('\lambda (nm)',' ',['RGB -> ' transformType ' sensitivity'],0,0,18,14)
+    Fig.format('\lambda (nm)',' ',['RGB -> ' transformType ' sensitivity'],0,0,18,14)
     axis tight
     xlim([350 750])
     set(gca,'xtick',[400:100:700])
@@ -132,6 +132,6 @@ if bPLOT
 %     xlim([350 750])
 %     set(gca,'xtick',[400:100:700])
 %     set(gca,'yscale','log');
-%     formatFigure('\lambda (nm)','Value')
+%     Fig.format('\lambda (nm)','Value')
 %     legend({'Aperture','Shutter Speed'},4);
 end
