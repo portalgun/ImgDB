@@ -16,6 +16,9 @@ methods
         end
         obj.database=database;
         obj.rootDBdir=Env.var('db',database);
+        if isempty(obj.rootDBdir)
+            obj.rootDBdir=Env.var('IMGDB.DB',database);
+        end
 
         obj.get_db_info();
         if ~bNoPlane
